@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+이 파일은 GitHub Pages 호스팅 전용입니다.
+공지에는 절대 붙여넣지 마세요!
+
+사용법:
+1. 이 gallery.html 파일을 https://github.com/commanderzico/no3miggi 레포 루트에 업로드 (full/, thumbs/, background.png 와 같은 폴더에)
+2. 레포 Settings > Pages > Source: main branch, root 로 설정
+3. https://commanderzico.github.io/no3miggi/gallery.html 로 접속하면 다크 배경 + 카드 + 클릭 시 팝업 작동
+4. 공지에는 "시그갤러리_SOOP_공지_외부버튼_팝업.html" 내용만 복사해서 사용
+5. 개별 시그 바로 팝업 테스트: URL 끝에 #sig-코드 추가 (예: #sig-50000)
+-->
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>광우상사 시그니처 컬렉션 ✦ 커맨더지코 방송국</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+    background: #0c0a12 url('https://raw.githubusercontent.com/commanderzico/no3miggi/main/background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #f2eef8;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 12px 40px; }
+  .header { text-align: center; margin-bottom: 20px; }
+  .top-decor { font-size: 15px; color: #d4b896; letter-spacing: 0.5em; opacity: 0.9; margin-bottom: 2px; }
+  h1 { font-size: 28px; margin: 2px 0 6px; color: #f5e6c8; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+  .new { font-size: 13px; color: #f5d08a; background: rgba(0,0,0,0.3); display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid #3a2a55; }
+  .grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .card {
+    width: 104px; background: #181426; border: 1px solid #3a2a55; border-radius: 6px;
+    padding: 5px 4px 6px; text-align: center; transition: transform .2s, box-shadow .2s, border-color .2s;
+    cursor: pointer; text-decoration: none; color: inherit; display: block;
+  }
+  .card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 6px 16px rgba(0,0,0,0.5); border-color: #d4b896; }
+  .card.deleted { background: #2a1820; border-color: #6b2a3a; }
+  .card.deleted:hover { border-color: #c06070; }
+  .thumb { width: 64px; height: 64px; margin: 0 auto 4px; border-radius: 4px; border: 1px solid #2a223a; background: #111; overflow: hidden; display: block; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .num { font-weight: 700; font-size: 13px; color: #f5d08a; line-height: 1; }
+  .card.deleted .num { color: #c66; }
+  .name { font-size: 9px; color: #b8a8c8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .card.deleted .name { color: #a08088; }
+  .deleted-badge { font-size: 7px; color: #c06070; margin-top: 1px; letter-spacing: 0.5px; }
+
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
+  .modal:target { display: flex; }
+  .modal-content { background: #16121f; border: 1px solid #3a2a55; border-radius: 8px; max-width: 92vw; max-height: 92vh; overflow: auto; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+  .modal-close { position: absolute; top: 8px; right: 10px; color: #d4b896; font-size: 28px; text-decoration: none; line-height: 1; z-index: 10; background: rgba(0,0,0,0.5); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .modal-close:hover { color: #fff; background: #6b2a3a; }
+  .modal img { display: block; max-width: 88vw; max-height: 72vh; margin: 0 auto; border-radius: 4px; }
+  .modal-info { text-align: center; padding: 10px 12px 14px; color: #e8e0f0; font-size: 14px; }
+  .modal-info .code { font-weight: 700; color: #f5d08a; font-size: 15px; }
+  .modal-info .deleted { color: #c66; }
+  .modal-info .title { color: #b8a8c8; font-size: 11px; margin-top: 2px; }
+  .footer { margin-top: 30px; text-align: center; font-size: 10px; color: #8a7a9a; }
+  .footer a { color: #d4b896; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="top-decor">✦ 커맨더지코 방송국 ✦</div>
+    <h1>광우상사 시그니처 컬렉션</h1>
+    <div class="new">NEW 시그 • 클릭하면 바로 팝업</div>
+  </div>
+  <div class="grid">
+<a href="#sig-50000" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/50000_STILL_FIGHT.png" alt=""></span>
+  <div class="num">50000</div>
+  <div class="name">STILL FIGHT</div>
+  
+</a>
+<a href="#sig-21004" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/21004_엔젤.png" alt=""></span>
+  <div class="num">21004</div>
+  <div class="name">엔젤</div>
+  
+</a>
+<a href="#sig-20824" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/20824_헤이마마.png" alt=""></span>
+  <div class="num">20824</div>
+  <div class="name">헤이마마</div>
+  
+</a>
+<a href="#sig-20088" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/20088_붕가댄스.png" alt=""></span>
+  <div class="num">20088</div>
+  <div class="name">붕가댄스</div>
+  
+</a>
+<a href="#sig-20077" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/20077_UP.png" alt=""></span>
+  <div class="num">20077</div>
+  <div class="name">UP</div>
+  
+</a>
+<a href="#sig-20072" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/20072_큰_줌마.png" alt=""></span>
+  <div class="num">20072</div>
+  <div class="name">큰 줌마</div>
+  
+</a>
+<a href="#sig-20000" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/20000_슈퍼클라스.png" alt=""></span>
+  <div class="num">20000</div>
+  <div class="name">슈퍼클라스</div>
+  
+</a>
+<a href="#sig-18181" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/18181_계집신조.png" alt=""></span>
+  <div class="num">18181</div>
+  <div class="name">계집신조</div>
+  
+</a>
+<a href="#sig-12472" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/12472_사랑해박광우.png" alt=""></span>
+  <div class="num">12472</div>
+  <div class="name">사랑해박광우</div>
+  
+</a>
+<a href="#sig-11272" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/11272_그녀가웃잖아.png" alt=""></span>
+  <div class="num">11272</div>
+  <div class="name">그녀가웃잖아</div>
+  
+</a>
+<a href="#sig-10924" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10924_악마스님.png" alt=""></span>
+  <div class="num">10924</div>
+  <div class="name">악마스님</div>
+  
+</a>
+<a href="#sig-10824" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10824_헤이마마.png" alt=""></span>
+  <div class="num">10824</div>
+  <div class="name">헤이마마</div>
+  
+</a>
+<a href="#sig-10516" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10516_김신영.png" alt=""></span>
+  <div class="num">10516</div>
+  <div class="name">김신영</div>
+  
+</a>
+<a href="#sig-10325" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10325_백수.png" alt=""></span>
+  <div class="num">10325</div>
+  <div class="name">백수</div>
+  
+</a>
+<a href="#sig-10252" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10252_무한성.png" alt=""></span>
+  <div class="num">10252</div>
+  <div class="name">무한성</div>
+  
+</a>
+<a href="#sig-10250" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10250_럼블.png" alt=""></span>
+  <div class="num">10250</div>
+  <div class="name">럼블</div>
+  
+</a>
+<a href="#sig-10182" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10182_패딩2.png" alt=""></span>
+  <div class="num">10182</div>
+  <div class="name">패딩2</div>
+  
+</a>
+<a href="#sig-10172" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10172_Ji2.png" alt=""></span>
+  <div class="num">10172</div>
+  <div class="name">Ji2</div>
+  
+</a>
+<a href="#sig-10119" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10119_기억을지워주는병원.png" alt=""></span>
+  <div class="num">10119</div>
+  <div class="name">기억을지워주는병원</div>
+  
+</a>
+<a href="#sig-10117" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10117_류키쿠.png" alt=""></span>
+  <div class="num">10117</div>
+  <div class="name">류키쿠</div>
+  
+</a>
+<a href="#sig-10072" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10072_박광우_아줌마.png" alt=""></span>
+  <div class="num">10072</div>
+  <div class="name">박광우 아줌마</div>
+  
+</a>
+<a href="#sig-10034" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10034_양치기물소.png" alt=""></span>
+  <div class="num">10034</div>
+  <div class="name">양치기물소</div>
+  
+</a>
+<a href="#sig-10030" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10030_물당번.png" alt=""></span>
+  <div class="num">10030</div>
+  <div class="name">물당번</div>
+  
+</a>
+<a href="#sig-10007" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10007_이타치.png" alt=""></span>
+  <div class="num">10007</div>
+  <div class="name">이타치</div>
+  
+</a>
+<a href="#sig-10006" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/10006_김가을커튼남.png" alt=""></span>
+  <div class="num">10006</div>
+  <div class="name">김가을커튼남</div>
+  
+</a>
+<a href="#sig-9999" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/9999_숏예비개.png" alt=""></span>
+  <div class="num">9999</div>
+  <div class="name">숏예비개</div>
+  
+</a>
+<a href="#sig-8282" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/8282_숏세멘.png" alt=""></span>
+  <div class="num">8282</div>
+  <div class="name">숏세멘</div>
+  
+</a>
+<a href="#sig-5444" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/5444_숏세멘개.png" alt=""></span>
+  <div class="num">5444</div>
+  <div class="name">숏세멘개</div>
+  
+</a>
+<a href="#sig-5123" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/5123_숏상한가.png" alt=""></span>
+  <div class="num">5123</div>
+  <div class="name">숏상한가</div>
+  
+</a>
+<a href="#sig-5052" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/5052_원기옥.png" alt=""></span>
+  <div class="num">5052</div>
+  <div class="name">원기옥</div>
+  
+</a>
+<a href="#sig-5025" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/5025_Love_is_Gone.png" alt=""></span>
+  <div class="num">5025</div>
+  <div class="name">Love is Gone</div>
+  
+</a>
+<a href="#sig-4525" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/4525_Fire_Stone.png" alt=""></span>
+  <div class="num">4525</div>
+  <div class="name">Fire Stone</div>
+  
+</a>
+<a href="#sig-3339" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/3339_Holy_Moly.png" alt=""></span>
+  <div class="num">3339</div>
+  <div class="name">Holy Moly</div>
+  
+</a>
+<a href="#sig-3332" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/3332_Come_Thru.png" alt=""></span>
+  <div class="num">3332</div>
+  <div class="name">Come Thru</div>
+  
+</a>
+<a href="#sig-3057" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/3057_니코틴_.png" alt=""></span>
+  <div class="num">3057</div>
+  <div class="name">니코틴_</div>
+  
+</a>
+<a href="#sig-3052" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/3052_꼬마선장.png" alt=""></span>
+  <div class="num">3052</div>
+  <div class="name">꼬마선장</div>
+  
+</a>
+<a href="#sig-2445" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/2445_that&#39;s_nono.png" alt=""></span>
+  <div class="num">2445</div>
+  <div class="name">that&#39;s nono</div>
+  
+</a>
+<a href="#sig-2210" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/2210_bang_bang.png" alt=""></span>
+  <div class="num">2210</div>
+  <div class="name">bang bang</div>
+  
+</a>
+<a href="#sig-2101" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/2101_캐치캐치.png" alt=""></span>
+  <div class="num">2101</div>
+  <div class="name">캐치캐치</div>
+  
+</a>
+<a href="#sig-2020" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/2020_Rude!.png" alt=""></span>
+  <div class="num">2020</div>
+  <div class="name">Rude!</div>
+  
+</a>
+<a href="#sig-2019" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/2019_오빠하앙.png" alt=""></span>
+  <div class="num">2019</div>
+  <div class="name">오빠하앙</div>
+  
+</a>
+<a href="#sig-1998" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1998_FOCUS.png" alt=""></span>
+  <div class="num">1998</div>
+  <div class="name">FOCUS</div>
+  
+</a>
+<a href="#sig-1750" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1750_style.png" alt=""></span>
+  <div class="num">1750</div>
+  <div class="name">style</div>
+  
+</a>
+<a href="#sig-1700" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1700_노바치당.png" alt=""></span>
+  <div class="num">1700</div>
+  <div class="name">노바치당</div>
+  
+</a>
+<a href="#sig-1555" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1555_낫큐트애니모어.png" alt=""></span>
+  <div class="num">1555</div>
+  <div class="name">낫큐트애니모어</div>
+  
+</a>
+<a href="#sig-1447" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1447_it&#39;s_sexy.png" alt=""></span>
+  <div class="num">1447</div>
+  <div class="name">it&#39;s sexy</div>
+  
+</a>
+<a href="#sig-1325" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1325_여름이었다.png" alt=""></span>
+  <div class="num">1325</div>
+  <div class="name">여름이었다</div>
+  
+</a>
+<a href="#sig-1319" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1319_종소리.png" alt=""></span>
+  <div class="num">1319</div>
+  <div class="name">종소리</div>
+  
+</a>
+<a href="#sig-1300" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1300_트월킹덕.png" alt=""></span>
+  <div class="num">1300</div>
+  <div class="name">트월킹덕</div>
+  
+</a>
+<a href="#sig-1166" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1166_눈물참기.png" alt=""></span>
+  <div class="num">1166</div>
+  <div class="name">눈물참기</div>
+  
+</a>
+<a href="#sig-1155" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1155_잇츠미.png" alt=""></span>
+  <div class="num">1155</div>
+  <div class="name">잇츠미</div>
+  
+</a>
+<a href="#sig-1130" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1130_모시모시.png" alt=""></span>
+  <div class="num">1130</div>
+  <div class="name">모시모시</div>
+  
+</a>
+<a href="#sig-1095" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1095_힙합보단사랑.png" alt=""></span>
+  <div class="num">1095</div>
+  <div class="name">힙합보단사랑</div>
+  
+</a>
+<a href="#sig-1008" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1008_더러운_입.png" alt=""></span>
+  <div class="num">1008</div>
+  <div class="name">더러운 입</div>
+  
+</a>
+<a href="#sig-1005" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1005_먀옹.png" alt=""></span>
+  <div class="num">1005</div>
+  <div class="name">먀옹</div>
+  
+</a>
+<a href="#sig-1004" class="card">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1004_오버드라이브.png" alt=""></span>
+  <div class="num">1004</div>
+  <div class="name">오버드라이브</div>
+  
+</a>
+<a href="#sig-1119" class="card deleted">
+  <span class="thumb"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/thumbs/1119_불나비.png" alt=""></span>
+  <div class="num deleted">1119</div>
+  <div class="name deleted">불나비</div>
+  <div class="deleted-badge">삭제시그</div>
+</a>
+  </div>
+  <div class="footer">커맨더지코 방송국 • GitHub Pages • 팝업 지원</div>
+</div>
+
+<div id="sig-50000" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/50000_STILL_FIGHT.png" alt="50000 STILL FIGHT">
+    <div class="modal-info">
+      <div class="code">50000</div>
+      <div class="title">STILL FIGHT</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-21004" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/21004_엔젤.png" alt="21004 엔젤">
+    <div class="modal-info">
+      <div class="code">21004</div>
+      <div class="title">엔젤</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-20824" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/20824_헤이마마.gif" alt="20824 헤이마마">
+    <div class="modal-info">
+      <div class="code">20824</div>
+      <div class="title">헤이마마</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-20088" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/20088_붕가댄스.png" alt="20088 붕가댄스">
+    <div class="modal-info">
+      <div class="code">20088</div>
+      <div class="title">붕가댄스</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-20077" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/20077_UP.png" alt="20077 UP">
+    <div class="modal-info">
+      <div class="code">20077</div>
+      <div class="title">UP</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-20072" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/20072_큰_줌마.gif" alt="20072 큰 줌마">
+    <div class="modal-info">
+      <div class="code">20072</div>
+      <div class="title">큰 줌마</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-20000" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/20000_슈퍼클라스.png" alt="20000 슈퍼클라스">
+    <div class="modal-info">
+      <div class="code">20000</div>
+      <div class="title">슈퍼클라스</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-18181" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/18181_계집신조.png" alt="18181 계집신조">
+    <div class="modal-info">
+      <div class="code">18181</div>
+      <div class="title">계집신조</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-12472" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/12472_사랑해박광우.gif" alt="12472 사랑해박광우">
+    <div class="modal-info">
+      <div class="code">12472</div>
+      <div class="title">사랑해박광우</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-11272" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/11272_그녀가웃잖아.gif" alt="11272 그녀가웃잖아">
+    <div class="modal-info">
+      <div class="code">11272</div>
+      <div class="title">그녀가웃잖아</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10924" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10924_악마스님.gif" alt="10924 악마스님">
+    <div class="modal-info">
+      <div class="code">10924</div>
+      <div class="title">악마스님</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10824" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10824_헤이마마.gif" alt="10824 헤이마마">
+    <div class="modal-info">
+      <div class="code">10824</div>
+      <div class="title">헤이마마</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10516" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10516_김신영.png" alt="10516 김신영">
+    <div class="modal-info">
+      <div class="code">10516</div>
+      <div class="title">김신영</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10325" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10325_백수.gif" alt="10325 백수">
+    <div class="modal-info">
+      <div class="code">10325</div>
+      <div class="title">백수</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10252" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10252_무한성.png" alt="10252 무한성">
+    <div class="modal-info">
+      <div class="code">10252</div>
+      <div class="title">무한성</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10250" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10250_럼블.png" alt="10250 럼블">
+    <div class="modal-info">
+      <div class="code">10250</div>
+      <div class="title">럼블</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10182" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10182_패딩2.gif" alt="10182 패딩2">
+    <div class="modal-info">
+      <div class="code">10182</div>
+      <div class="title">패딩2</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10172" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10172_Ji2.gif" alt="10172 Ji2">
+    <div class="modal-info">
+      <div class="code">10172</div>
+      <div class="title">Ji2</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10119" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10119_기억을지워주는병원.gif" alt="10119 기억을지워주는병원">
+    <div class="modal-info">
+      <div class="code">10119</div>
+      <div class="title">기억을지워주는병원</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10117" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10117_류키쿠.gif" alt="10117 류키쿠">
+    <div class="modal-info">
+      <div class="code">10117</div>
+      <div class="title">류키쿠</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10072" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10072_박광우_아줌마.gif" alt="10072 박광우 아줌마">
+    <div class="modal-info">
+      <div class="code">10072</div>
+      <div class="title">박광우 아줌마</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10034" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10034_양치기물소.gif" alt="10034 양치기물소">
+    <div class="modal-info">
+      <div class="code">10034</div>
+      <div class="title">양치기물소</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10030" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10030_물당번.gif" alt="10030 물당번">
+    <div class="modal-info">
+      <div class="code">10030</div>
+      <div class="title">물당번</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10007" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10007_이타치.gif" alt="10007 이타치">
+    <div class="modal-info">
+      <div class="code">10007</div>
+      <div class="title">이타치</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-10006" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/10006_김가을커튼남.gif" alt="10006 김가을커튼남">
+    <div class="modal-info">
+      <div class="code">10006</div>
+      <div class="title">김가을커튼남</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-9999" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/9999_숏예비개.gif" alt="9999 숏예비개">
+    <div class="modal-info">
+      <div class="code">9999</div>
+      <div class="title">숏예비개</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-8282" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/8282_숏세멘.gif" alt="8282 숏세멘">
+    <div class="modal-info">
+      <div class="code">8282</div>
+      <div class="title">숏세멘</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-5444" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/5444_숏세멘개.png" alt="5444 숏세멘개">
+    <div class="modal-info">
+      <div class="code">5444</div>
+      <div class="title">숏세멘개</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-5123" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/5123_숏상한가.gif" alt="5123 숏상한가">
+    <div class="modal-info">
+      <div class="code">5123</div>
+      <div class="title">숏상한가</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-5052" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/5052_원기옥.png" alt="5052 원기옥">
+    <div class="modal-info">
+      <div class="code">5052</div>
+      <div class="title">원기옥</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-5025" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/5025_Love_is_Gone.png" alt="5025 Love is Gone">
+    <div class="modal-info">
+      <div class="code">5025</div>
+      <div class="title">Love is Gone</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-4525" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/4525_Fire_Stone.png" alt="4525 Fire Stone">
+    <div class="modal-info">
+      <div class="code">4525</div>
+      <div class="title">Fire Stone</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-3339" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/3339_Holy_Moly.png" alt="3339 Holy Moly">
+    <div class="modal-info">
+      <div class="code">3339</div>
+      <div class="title">Holy Moly</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-3332" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/3332_Come_Thru.gif" alt="3332 Come Thru">
+    <div class="modal-info">
+      <div class="code">3332</div>
+      <div class="title">Come Thru</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-3057" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/3057_니코틴.gif" alt="3057 니코틴_">
+    <div class="modal-info">
+      <div class="code">3057</div>
+      <div class="title">니코틴_</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-3052" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/3052_꼬마선장.png" alt="3052 꼬마선장">
+    <div class="modal-info">
+      <div class="code">3052</div>
+      <div class="title">꼬마선장</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-2445" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/2445_that_s_nono.png" alt="2445 that&#39;s nono">
+    <div class="modal-info">
+      <div class="code">2445</div>
+      <div class="title">that&#39;s nono</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-2210" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/2210_bang_bang.png" alt="2210 bang bang">
+    <div class="modal-info">
+      <div class="code">2210</div>
+      <div class="title">bang bang</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-2101" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/2101_캐치캐치.png" alt="2101 캐치캐치">
+    <div class="modal-info">
+      <div class="code">2101</div>
+      <div class="title">캐치캐치</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-2020" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/2020_Rude.png" alt="2020 Rude!">
+    <div class="modal-info">
+      <div class="code">2020</div>
+      <div class="title">Rude!</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-2019" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/2019_오빠하앙.png" alt="2019 오빠하앙">
+    <div class="modal-info">
+      <div class="code">2019</div>
+      <div class="title">오빠하앙</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1998" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1998_FOCUS.png" alt="1998 FOCUS">
+    <div class="modal-info">
+      <div class="code">1998</div>
+      <div class="title">FOCUS</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1750" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1750_style.png" alt="1750 style">
+    <div class="modal-info">
+      <div class="code">1750</div>
+      <div class="title">style</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1700" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1700_노바치당.png" alt="1700 노바치당">
+    <div class="modal-info">
+      <div class="code">1700</div>
+      <div class="title">노바치당</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1555" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1555_낫큐트애니모어.png" alt="1555 낫큐트애니모어">
+    <div class="modal-info">
+      <div class="code">1555</div>
+      <div class="title">낫큐트애니모어</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1447" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1447_it_s_sexy.png" alt="1447 it&#39;s sexy">
+    <div class="modal-info">
+      <div class="code">1447</div>
+      <div class="title">it&#39;s sexy</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1325" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1325_여름이었다.png" alt="1325 여름이었다">
+    <div class="modal-info">
+      <div class="code">1325</div>
+      <div class="title">여름이었다</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1319" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1319_종소리.png" alt="1319 종소리">
+    <div class="modal-info">
+      <div class="code">1319</div>
+      <div class="title">종소리</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1300" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1300_트월킹덕.png" alt="1300 트월킹덕">
+    <div class="modal-info">
+      <div class="code">1300</div>
+      <div class="title">트월킹덕</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1166" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1166_눈물참기.png" alt="1166 눈물참기">
+    <div class="modal-info">
+      <div class="code">1166</div>
+      <div class="title">눈물참기</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1155" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1155_잇츠미.png" alt="1155 잇츠미">
+    <div class="modal-info">
+      <div class="code">1155</div>
+      <div class="title">잇츠미</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1130" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1130_모시모시.png" alt="1130 모시모시">
+    <div class="modal-info">
+      <div class="code">1130</div>
+      <div class="title">모시모시</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1095" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1095_힙합보단사랑.png" alt="1095 힙합보단사랑">
+    <div class="modal-info">
+      <div class="code">1095</div>
+      <div class="title">힙합보단사랑</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1008" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1008_더러운_입.png" alt="1008 더러운 입">
+    <div class="modal-info">
+      <div class="code">1008</div>
+      <div class="title">더러운 입</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1005" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1005_먀옹.png" alt="1005 먀옹">
+    <div class="modal-info">
+      <div class="code">1005</div>
+      <div class="title">먀옹</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1004" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1004_오버드라이브.png" alt="1004 오버드라이브">
+    <div class="modal-info">
+      <div class="code">1004</div>
+      <div class="title">오버드라이브</div>
+    </div>
+  </div>
+</div>
+
+<div id="sig-1119" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close" aria-label="닫기">×</a>
+    <img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/full/1119_불나비.png" alt="1119 불나비">
+    <div class="modal-info">
+      <div class="code deleted">1119 <span style="color:#c06070;font-size:10px;">(삭제시그)</span></div>
+      <div class="title">불나비</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) window.location.hash = ''; });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && location.hash) location.hash = '';
+  });
+  if (location.hash) setTimeout(() => { const w = document.querySelector('.wrap'); if (w) w.scrollIntoView({block:'start'}); }, 350);
+</script>
+</body></html>
