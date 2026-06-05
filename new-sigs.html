@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>광우상사 시그니처 컬렉션 - New Sigs (GitHub)</title>
+<!--
+================================================================================
+  로컬 테스트용 시그갤러리 (광우상사 6월 뉴시그 전용) — GitHub Pages 버전
+
+  이 페이지는 https://commanderzico.github.io/no3miggi/new-sigs.html 에서 공개 호스팅됩니다.
+  이미지들은 GitHub raw를 통해 로드되며, 클릭 시 원본 전체 이미지가 새 탭에서 열립니다.
+
+  (원본 로컬 버전은 new_sigs/ 폴더의 파일들을 직접 참조)
+================================================================================
+-->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      min-height: 100vh;
+      color: #f2eef8;
+      background:
+        radial-gradient(ellipse 90% 60% at 15% 0%, rgba(168, 120, 255, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 95% 10%, rgba(255, 196, 120, 0.14), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(80, 140, 255, 0.12), transparent 55%),
+        linear-gradient(168deg, #0c0a12 0%, #16121f 38%, #0f0d14 100%);
+      background-attachment: fixed;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    .wrap {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 32px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .header .top-decor {
+      font-size: 16px;
+      color: #d4b896;
+      letter-spacing: 0.4em;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+    .header .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d4b896;
+      border: 1px solid rgba(212, 184, 150, 0.35);
+      border-radius: 8px;
+      padding: 5px 14px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .header .subtitle {
+      font-size: 14px;
+      color: rgba(242, 238, 248, 0.75);
+      margin: 6px 0 10px;
+    }
+    .header h1 {
+      font-size: clamp(36px, 8vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #fff 0%, #f5e6c8 40%, #e8c49a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      margin: 8px 0;
+    }
+    .header p {
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(242, 238, 248, 0.55);
+    }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 325px);
+      gap: 16px 14px;
+      justify-content: center;
+    }
+    .sig-card {
+      position: relative;
+      width: 100%;
+      transform: rotate(var(--tilt));
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .sig-card:hover {
+      transform: rotate(0deg) scale(1.04);
+      z-index: 2;
+    }
+    .card-shine {
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255,220,160,0.18), rgba(180,140,255,0.1), rgba(100,180,255,0.08));
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .card-body {
+      position: relative;
+      z-index: 1;
+      padding: 8px 8px 10px;
+      border-radius: 12px;
+      background: rgba(12, 10, 18, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .thumb {
+      position: relative;
+      z-index: 1;
+      width: 290px;
+      height: 163px;
+      margin: 0 auto;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.15);
+      line-height: 0;
+    }
+    .thumb-btn {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: zoom-in;
+      line-height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+    .thumb-btn img {
+      width: 290px;
+      height: 163px;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.2s ease;
+      background: #111;
+    }
+    .thumb-btn:hover img { transform: scale(1.04); }
+    .thumb > img {
+      width: 290px;
+      height: 163px;
+      display: block;
+      object-fit: contain;
+    }
+    .no-img {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #999;
+    }
+    .meta {
+      margin-top: 5px;
+      padding: 2px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.07);
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 1;
+    }
+    .meta .badge {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      color: #a8a0b8;
+      background: rgba(255,255,255,0.08);
+      padding: 1px 4px;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .meta .sep {
+      color: #5a5468;
+      font-size: 9px;
+      margin: 0 0px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .meta .code {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff4d6;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .meta .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0edf8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+      opacity: 0.98;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    @media (max-width: 1320px) {
+      .sig-grid {
+        grid-template-columns: repeat(4, 305px);
+        gap: 14px 12px;
+      }
+      .thumb, .thumb-btn img, .thumb > img {
+        width: 282px;
+        height: 158px;
+      }
+      .meta {
+        padding: 1px 3px;
+        gap: 2px;
+      }
+      .meta .badge { font-size: 8px; padding: 0 4px; }
+      .meta .sep { font-size: 9px; margin: 0; }
+      .meta .code { font-size: 15px; }
+      .meta .title { font-size: 16px; font-weight: 700; color: #f0edf8; opacity: 0.98; }
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      color: rgba(242, 238, 248, 0.5);
+      font-size: 11px;
+    }
+    .footer .footer-line {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 184, 150, 0.3), transparent);
+      margin: 12px 0;
+    }
+    .footer .footer-main {
+      font-size: 13px;
+      color: #d4b896;
+      letter-spacing: 0.1em;
+    }
+    .footer .footer-sub {
+      margin-top: 4px;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="top-decor">✦ 커맨더지코 방송국 ✦</div>
+      <h1 style="font-size: clamp(28px, 7vw, 42px);">◆ 광우상사 6월 뉴시그 ◆</h1>
+      <p style="font-size:10px; color:#c8b8d8; margin-top:2px;">4×4 배열 · 클릭하여 원본 보기</p>
+    </header>
+    <section class="sig-grid">
+<article class="sig-card" id="sig-50000" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/50000_still_fight.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/50000_still_fight.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">50000</span>
+      <span class="sep">·</span>
+      <span class="title" title="still fight">still fight</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-20002" style="--tilt:0.0deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/20002_피파.png" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/20002_피파.png" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">20002</span>
+      <span class="sep">·</span>
+      <span class="title" title="피파">피파</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-15000" style="--tilt:0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/15000_존시나.png" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/15000_존시나.png" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">15000</span>
+      <span class="sep">·</span>
+      <span class="title" title="존시나">존시나</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-12482" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/12482_레츠고아이빈.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/12482_레츠고아이빈.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">12482</span>
+      <span class="sep">·</span>
+      <span class="title" title="레츠고아이빈">레츠고아이빈</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-12288" style="--tilt:0.0deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/12288_쀼.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/12288_쀼.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">12288</span>
+      <span class="sep">·</span>
+      <span class="title" title="쀼">쀼</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-11711" style="--tilt:0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11711_아이스티샷.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11711_아이스티샷.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">11711</span>
+      <span class="sep">·</span>
+      <span class="title" title="아이스티샷">아이스티샷</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-11122" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11122_토끼페이.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11122_토끼페이.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">11122</span>
+      <span class="sep">·</span>
+      <span class="title" title="토끼페이">토끼페이</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-11000" style="--tilt:0.0deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11000_불금.png" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/11000_불금.png" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">11000</span>
+      <span class="sep">·</span>
+      <span class="title" title="불금">불금</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-10325" style="--tilt:0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10325_25세백수형백수.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10325_25세백수형백수.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">10325</span>
+      <span class="sep">·</span>
+      <span class="title" title="25세백수형백수">25세백수형백수</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-10233" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10233_한남동이순신.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10233_한남동이순신.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">10233</span>
+      <span class="sep">·</span>
+      <span class="title" title="한남동이순신">한남동이순신</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-10070" style="--tilt:0.0deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10070_크레이지지아.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10070_크레이지지아.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">10070</span>
+      <span class="sep">·</span>
+      <span class="title" title="크레이지지아">크레이지지아</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-10052" style="--tilt:0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10052_Happiness_24.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/10052_Happiness_24.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">10052</span>
+      <span class="sep">·</span>
+      <span class="title" title="Happiness 24">Happiness 24</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-8282" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/8282_숏세멘.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/8282_숏세멘.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">8282</span>
+      <span class="sep">·</span>
+      <span class="title" title="숏세멘">숏세멘</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-3332" style="--tilt:0.0deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/3332_Come_Thru.gif" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/3332_Come_Thru.gif" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">3332</span>
+      <span class="sep">·</span>
+      <span class="title" title="Come Thru">Come Thru</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-3152" style="--tilt:0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/3152_좀비.png" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/3152_좀비.png" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">3152</span>
+      <span class="sep">·</span>
+      <span class="title" title="좀비">좀비</span>
+    </div>
+  </div>
+</article>
+<article class="sig-card" id="sig-1144" style="--tilt:-0.6deg">
+  <div class="card-shine"></div>
+  <div class="card-body">
+    <div class="thumb"><a href="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/1144_redred.png" class="thumb-btn" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/commanderzico/no3miggi/main/new_sigs/1144_redred.png" alt="" width="290" height="163"></a></div>
+    <div class="meta">
+      <span class="badge">원본</span>
+      <span class="code">1144</span>
+      <span class="sep">·</span>
+      <span class="title" title="redred">redred</span>
+    </div>
+  </div>
+</article>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <p class="footer-main">광우상사 시그니처 컬렉션</p>
+      <p class="footer-sub">6월 뉴시그 · 커맨더지코 방송국</p>
+    </footer>
+  </div>
+</body>
+</html>
